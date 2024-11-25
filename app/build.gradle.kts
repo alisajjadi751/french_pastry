@@ -64,4 +64,12 @@ dependencies {
 
     //Splash Api
     implementation ("androidx.core:core-splashscreen:1.0.1")
+
+    //Lifecycle
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.8.7")
+
+    //Navigation
+    implementation ("androidx.navigation:navigation-compose:2.6.0")
+
+
 }
