@@ -1,5 +1,7 @@
 pluginManagement {
     repositories {
+        mavenCentral()
+       maven ("https://maven.myket.ir")
         google {
             content {
                 includeGroupByRegex("com\\.android.*")
@@ -7,15 +9,23 @@ pluginManagement {
                 includeGroupByRegex("androidx.*")
             }
         }
-        mavenCentral()
+
         gradlePluginPortal()
+       maven ("https://jitpack.io") // اضافه کردن مخزن JitPack
+
+
+
     }
 }
 dependencyResolutionManagement {
     repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
     repositories {
-        google()
         mavenCentral()
+      maven ("https://maven.myket.ir")
+        google()
+
+       maven ("https://jitpack.io") // اضافه کردن مخزن JitPack
+
     }
 }
 

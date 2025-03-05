@@ -1,4 +1,4 @@
-package com.ali_sajjadi.frenchpastry.presentation.viewModel
+package com.ali_sajjadi.frenchpastry.viewModel
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -7,12 +7,13 @@ import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.ali_sajjadi.frenchpastry.utils.Constants.SPLASH_DELAY
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
-class ViewModelSplash(application: Application) : AndroidViewModel(application) {
+class SplashViewModel(application: Application) : AndroidViewModel(application) {
 
     //AlertDialog State
     private val _showDialog = MutableStateFlow(false)
@@ -22,28 +23,36 @@ class ViewModelSplash(application: Application) : AndroidViewModel(application) 
     private val _isInternetAvailable = MutableStateFlow(true)
     val isInternetAvailable: StateFlow<Boolean> = _isInternetAvailable
 
+    val isLoggedIn = MutableStateFlow(false)
+
+    val retryTrigger = MutableStateFlow(0)
+
+    fun triggerRetry() {
+        retryTrigger.value += 1
+    }
+
+
     //Start timer & check internet
-    fun startSplashTimer(
+    fun startSplashScreenDelay(
         navigateToLogin: () -> Unit
     ) {
         viewModelScope.launch {
             _isInternetAvailable.value = checkInternetConnection(getApplication())
-
             if (!_isInternetAvailable.value) {
                 _showDialog.value = true
             } else {
-                delay(3000L)
+
                 navigateToLogin()
             }
         }
     }
 
-    fun retryConnection() {
+    /*fun retryConnection() {
         _isInternetAvailable.value = checkInternetConnection(getApplication())
         if (_isInternetAvailable.value) {
             _showDialog.value = false
         }
-    }
+    }*/
 
     @SuppressLint("MissingPermission")
     private fun checkInternetConnection(context: Context): Boolean {

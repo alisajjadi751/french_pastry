@@ -8,5 +8,19 @@ sealed class Route(
     data object LoginScreen : Route(route = "loginScreen")
 
     data object HomeScreen : Route(route = "homeScreen")
+    data object CakeScreen : Route(route = "cakeScreen")
+    data object CartScreen : Route(route = "cartScreen")
+    data object PastryScreen : Route(route = "pastryScreen")
+    data object UserScreen : Route(route = "userScreen")
 
+    data object DetailsScreen: Route(route = "detailsScreen")
+
+    fun withArgs(vararg args: String): String {
+        return buildString {
+            append(route)
+            args.forEach { arg ->
+                append("/$arg")
+            }
+        }
+    }
 }
